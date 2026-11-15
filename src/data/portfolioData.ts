@@ -12,8 +12,8 @@ export const PROFILE = {
   title: 'Computer Science Engineering Student | Aspiring Software Developer',
   intro:
     'Building intelligent applications, exploring emerging technologies and transforming ideas into practical software solutions.',
-  photoUrl: '/assets/aistudio/Jan_photo_deac32e9.png',
-  resumeUrl: '/assets/aistudio/Janani_M_Resume_a4bd840d.pdf',
+  photoUrl: `${import.meta.env.BASE_URL}assets/aistudio/Jan_photo_deac32e9.png`,
+  resumeUrl: `${import.meta.env.BASE_URL}assets/aistudio/Janani_M_Resume_a4bd840d.pdf`,
   email: 'jananimurali0212@gmail.com',
   github: 'https://github.com/jananimurali0212',
   linkedin: 'https://www.linkedin.com/in/janani-murali0212/',
@@ -268,7 +268,7 @@ export const INITIAL_EXPERIENCES: ExperienceItem[] = [
       'Handled debugging, functionality verification, and end-to-end quality checks across negotiation scenarios.',
       'Received mentor appreciation for strong language proficiency, clear communication, and articulation.',
     ],
-    certificatePdfUrl: '/assets/aistudio/infosys_internship_artificial_intelligence_57d3e806.pdf',
+    certificatePdfUrl: `${import.meta.env.BASE_URL}assets/aistudio/infosys_internship_artificial_intelligence_57d3e806.pdf`,
     certificateVerifyUrl: 'https://verify.onwingspan.com',
   },
   {
@@ -285,7 +285,7 @@ export const INITIAL_EXPERIENCES: ExperienceItem[] = [
       'Identified five practical AI-driven growth recommendations tailored for NGO operations.',
       'Supported fundraising-related research and campaign activities on Ketto.',
     ],
-    certificatePdfUrl: '/assets/aistudio/Inamigos_internship_a2f427d0.pdf',
+    certificatePdfUrl: `${import.meta.env.BASE_URL}assets/aistudio/Inamigos_internship_a2f427d0.pdf`,
   },
 ];
 
@@ -298,7 +298,7 @@ export const INITIAL_CERTIFICATIONS: CertificationItem[] = [
     issueDate: 'November 9, 2026',
     details:
       'Creation of AI Driven Multi-Agent Negotiation Training & Simulation Platform (July 15 – September 20, 2026).',
-    pdfUrl: '/assets/aistudio/infosys_internship_artificial_intelligence_57d3e806.pdf',
+    pdfUrl: `${import.meta.env.BASE_URL}assets/aistudio/infosys_internship_artificial_intelligence_57d3e806.pdf`,
     verificationUrl: 'https://verify.onwingspan.com',
   },
   {
@@ -308,7 +308,7 @@ export const INITIAL_CERTIFICATIONS: CertificationItem[] = [
     category: 'AI & Web Development',
     issueDate: 'June 30, 2026',
     details: 'Completion of AI Web Development Internship (June 13 – June 26, 2026).',
-    pdfUrl: '/assets/aistudio/Inamigos_internship_a2f427d0.pdf',
+    pdfUrl: `${import.meta.env.BASE_URL}assets/aistudio/Inamigos_internship_a2f427d0.pdf`,
   },
   {
     id: 'cert-nptel-java',
