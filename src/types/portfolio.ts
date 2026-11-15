@@ -62,9 +62,8 @@ export interface AchievementItem {
   id: string;
   title: string;
   eventOrContext: string;
-  dateLabel: string;
+  dateLabel?: string;
   description: string;
-  isEditable?: boolean;
 }
 
 export interface SkillGroup {

@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { PROFILE } from '../data/portfolioData';
 import { TechIcon } from './TechIcons';
+import { Tilt3D } from './Tilt3D';
 
 interface FormState {
   name: string;
@@ -101,110 +102,124 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-16 sm:py-24">
+    <section id="contact" className="py-8 sm:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.45 }}
-          className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12"
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
+          className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10"
         >
           {/* Left Column: Direct Contact Channels */}
           <div className="lg:col-span-5">
             <p className="text-sm font-semibold text-[#0D9488]">Contact</p>
-            <h2 className="mt-2 font-display text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              Connect for internships &amp; engineering roles
+            <h2 className="mt-1.5 font-display text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
+              Connect for internships &amp; roles
             </h2>
-            <p className="mt-3 text-base leading-relaxed text-[#334155]">
+            <p className="mt-2.5 text-sm leading-relaxed text-[#334155] sm:text-base">
               Open to software development, Artificial Intelligence, Python, full-stack, and
               testing/QA internship opportunities as well as collaborative engineering projects.
             </p>
 
-            <div className="mt-8 space-y-4">
+            <div className="mt-6 space-y-3.5">
               {/* Email */}
-              <div className="flex items-center justify-between gap-3 rounded-xl border border-[#CBD5E1] bg-white p-4 shadow-xs">
-                <div className="flex min-w-0 items-center gap-3.5">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#CBD5E1] bg-[#F8FAFC] text-[#2563EB]">
-                    <Mail className="h-5 w-5" aria-hidden="true" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-xs text-[#64748B]">Email</p>
-                    <a
-                      href={`mailto:${PROFILE.email}`}
-                      className="block truncate text-sm font-semibold text-[#0F172A] hover:text-[#2563EB]"
+              <Tilt3D maxTilt={7} scaleOnHover={1.015}>
+                <div className="flex items-center justify-between gap-3 rounded-xl border border-[#CBD5E1] bg-white p-4 shadow-xs transition-colors hover:border-[#2563EB]">
+                  <div className="flex min-w-0 items-center gap-3.5">
+                    <div
+                      style={{ transform: 'translateZ(16px)' }}
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#CBD5E1] bg-[#F8FAFC] text-[#2563EB]"
                     >
-                      {PROFILE.email}
-                    </a>
+                      <Mail className="h-5 w-5" aria-hidden="true" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-xs text-[#64748B]">Email</p>
+                      <a
+                        href={`mailto:${PROFILE.email}`}
+                        className="block truncate text-sm font-semibold text-[#0F172A] hover:text-[#2563EB]"
+                      >
+                        {PROFILE.email}
+                      </a>
+                    </div>
                   </div>
+                  <button
+                    type="button"
+                    onClick={handleCopyEmail}
+                    aria-label="Copy email address"
+                    className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-lg border border-[#CBD5E1] bg-[#F8FAFC] px-3 text-xs font-medium text-[#334155] whitespace-nowrap transition-colors hover:border-[#2563EB] hover:text-[#0F172A]"
+                  >
+                    {copiedEmail ? (
+                      <>
+                        <Check className="h-3.5 w-3.5 text-[#0D9488]" />
+                        <span>Copied</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="h-3.5 w-3.5" />
+                        <span>Copy</span>
+                      </>
+                    )}
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  onClick={handleCopyEmail}
-                  aria-label="Copy email address"
-                  className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-lg border border-[#CBD5E1] bg-[#F8FAFC] px-3 text-xs font-medium text-[#334155] transition-colors hover:border-[#2563EB] hover:text-[#0F172A]"
-                >
-                  {copiedEmail ? (
-                    <>
-                      <Check className="h-3.5 w-3.5 text-[#0D9488]" />
-                      <span>Copied</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="h-3.5 w-3.5" />
-                      <span>Copy</span>
-                    </>
-                  )}
-                </button>
-              </div>
+              </Tilt3D>
 
               {/* LinkedIn */}
-              <a
-                href={PROFILE.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between gap-3 rounded-xl border border-[#CBD5E1] bg-white p-4 shadow-xs transition-colors hover:border-[#2563EB]"
-              >
-                <div className="flex min-w-0 items-center gap-3.5">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#CBD5E1] bg-[#F8FAFC] text-[#2563EB]">
-                    <Linkedin className="h-5 w-5" aria-hidden="true" />
+              <Tilt3D maxTilt={7} scaleOnHover={1.015}>
+                <a
+                  href={PROFILE.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between gap-3 rounded-xl border border-[#CBD5E1] bg-white p-4 shadow-xs transition-colors hover:border-[#2563EB]"
+                >
+                  <div className="flex min-w-0 items-center gap-3.5">
+                    <div
+                      style={{ transform: 'translateZ(16px)' }}
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#CBD5E1] bg-[#F8FAFC] text-[#2563EB]"
+                    >
+                      <Linkedin className="h-5 w-5" aria-hidden="true" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-xs text-[#64748B]">LinkedIn</p>
+                      <p className="truncate text-sm font-semibold text-[#0F172A]">
+                        linkedin.com/in/janani-murali0212
+                      </p>
+                    </div>
                   </div>
-                  <div className="min-w-0">
-                    <p className="text-xs text-[#64748B]">LinkedIn</p>
-                    <p className="truncate text-sm font-semibold text-[#0F172A]">
-                      linkedin.com/in/janani-murali0212
-                    </p>
-                  </div>
-                </div>
-                <span className="shrink-0 text-xs font-semibold text-[#2563EB]">Open</span>
-              </a>
+                  <span className="shrink-0 text-xs font-semibold text-[#2563EB]">Open</span>
+                </a>
+              </Tilt3D>
 
               {/* GitHub */}
-              <a
-                href={PROFILE.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between gap-3 rounded-xl border border-[#CBD5E1] bg-white p-4 shadow-xs transition-colors hover:border-[#2563EB]"
-              >
-                <div className="flex min-w-0 items-center gap-3.5">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#CBD5E1] bg-[#F8FAFC] text-[#0F172A]">
-                    <TechIcon id="github" className="h-5 w-5" />
+              <Tilt3D maxTilt={7} scaleOnHover={1.015}>
+                <a
+                  href={PROFILE.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between gap-3 rounded-xl border border-[#CBD5E1] bg-white p-4 shadow-xs transition-colors hover:border-[#2563EB]"
+                >
+                  <div className="flex min-w-0 items-center gap-3.5">
+                    <div
+                      style={{ transform: 'translateZ(16px)' }}
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#CBD5E1] bg-[#F8FAFC] text-[#0F172A]"
+                    >
+                      <TechIcon id="github" className="h-5 w-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-xs text-[#64748B]">GitHub</p>
+                      <p className="truncate text-sm font-semibold text-[#0F172A]">
+                        github.com/jananimurali0212
+                      </p>
+                    </div>
                   </div>
-                  <div className="min-w-0">
-                    <p className="text-xs text-[#64748B]">GitHub</p>
-                    <p className="truncate text-sm font-semibold text-[#0F172A]">
-                      github.com/jananimurali0212
-                    </p>
-                  </div>
-                </div>
-                <span className="shrink-0 text-xs font-semibold text-[#2563EB]">Open</span>
-              </a>
+                  <span className="shrink-0 text-xs font-semibold text-[#2563EB]">Open</span>
+                </a>
+              </Tilt3D>
             </div>
           </div>
 
           {/* Right Column: Validated Contact Form with Honest Backend Notice */}
           <div className="lg:col-span-7">
-            <div className="rounded-2xl border border-[#CBD5E1] bg-white p-6 shadow-xs sm:p-8">
+            <div className="rounded-2xl border border-[#CBD5E1] bg-white p-5 shadow-xs sm:p-6">
               <h3 className="font-display text-xl font-bold text-[#0F172A]">Send a Message</h3>
               <p className="mt-1 text-xs text-[#64748B]">
                 Validated contact composer. Direct server delivery requires configuring an email API
@@ -212,8 +227,8 @@ export const Contact: React.FC = () => {
                 client.
               </p>
 
-              <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <form onSubmit={handleSubmit} noValidate className="mt-4 space-y-3.5">
+                <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                   <div>
                     <label
                       htmlFor="contact-name"
@@ -231,10 +246,10 @@ export const Contact: React.FC = () => {
                       }}
                       placeholder="Your name"
                       aria-invalid={Boolean(errors.name)}
-                      className="mt-1.5 h-11 w-full rounded-lg border border-[#CBD5E1] bg-[#F8FAFC] px-3.5 text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:border-[#2563EB] focus:outline-none"
+                      className="mt-1 h-10 w-full rounded-lg border border-[#CBD5E1] bg-[#F8FAFC] px-3.5 text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:border-[#2563EB] focus:outline-none"
                     />
                     {errors.name && (
-                      <p className="mt-1.5 flex items-center gap-1.5 text-xs text-rose-600">
+                      <p className="mt-1 flex items-center gap-1.5 text-xs text-rose-600">
                         <AlertCircle className="h-3.5 w-3.5 shrink-0" />
                         <span>{errors.name}</span>
                       </p>
@@ -258,10 +273,10 @@ export const Contact: React.FC = () => {
                       }}
                       placeholder="you@company.com"
                       aria-invalid={Boolean(errors.email)}
-                      className="mt-1.5 h-11 w-full rounded-lg border border-[#CBD5E1] bg-[#F8FAFC] px-3.5 text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:border-[#2563EB] focus:outline-none"
+                      className="mt-1 h-10 w-full rounded-lg border border-[#CBD5E1] bg-[#F8FAFC] px-3.5 text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:border-[#2563EB] focus:outline-none"
                     />
                     {errors.email && (
-                      <p className="mt-1.5 flex items-center gap-1.5 text-xs text-rose-600">
+                      <p className="mt-1 flex items-center gap-1.5 text-xs text-rose-600">
                         <AlertCircle className="h-3.5 w-3.5 shrink-0" />
                         <span>{errors.email}</span>
                       </p>
@@ -286,10 +301,10 @@ export const Contact: React.FC = () => {
                     }}
                     placeholder="Internship opportunity / Technical discussion"
                     aria-invalid={Boolean(errors.subject)}
-                    className="mt-1.5 h-11 w-full rounded-lg border border-[#CBD5E1] bg-[#F8FAFC] px-3.5 text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:border-[#2563EB] focus:outline-none"
+                    className="mt-1 h-10 w-full rounded-lg border border-[#CBD5E1] bg-[#F8FAFC] px-3.5 text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:border-[#2563EB] focus:outline-none"
                   />
                   {errors.subject && (
-                    <p className="mt-1.5 flex items-center gap-1.5 text-xs text-rose-600">
+                    <p className="mt-1 flex items-center gap-1.5 text-xs text-rose-600">
                       <AlertCircle className="h-3.5 w-3.5 shrink-0" />
                       <span>{errors.subject}</span>
                     </p>
@@ -305,7 +320,7 @@ export const Contact: React.FC = () => {
                   </label>
                   <textarea
                     id="contact-message"
-                    rows={4}
+                    rows={3}
                     value={form.message}
                     onChange={(e) => {
                       setForm((f) => ({ ...f, message: e.target.value }));
@@ -313,20 +328,20 @@ export const Contact: React.FC = () => {
                     }}
                     placeholder="Share role details, interview availability, or project context..."
                     aria-invalid={Boolean(errors.message)}
-                    className="mt-1.5 w-full rounded-lg border border-[#CBD5E1] bg-[#F8FAFC] p-3.5 text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:border-[#2563EB] focus:outline-none"
+                    className="mt-1 w-full rounded-lg border border-[#CBD5E1] bg-[#F8FAFC] p-3 text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:border-[#2563EB] focus:outline-none"
                   />
                   {errors.message && (
-                    <p className="mt-1.5 flex items-center gap-1.5 text-xs text-rose-600">
+                    <p className="mt-1 flex items-center gap-1.5 text-xs text-rose-600">
                       <AlertCircle className="h-3.5 w-3.5 shrink-0" />
                       <span>{errors.message}</span>
                     </p>
                   )}
                 </div>
 
-                <div className="pt-1">
+                <div className="pt-0.5">
                   <button
                     type="submit"
-                    className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#2563EB] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#1D4ED8]"
+                    className="inline-flex h-10 items-center gap-2 rounded-lg bg-[#2563EB] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#1D4ED8]"
                   >
                     <Send className="h-4 w-4" aria-hidden="true" />
                     <span>Prepare &amp; Validate Message</span>
@@ -338,7 +353,7 @@ export const Contact: React.FC = () => {
               {submittedMessage && (
                 <div
                   role="status"
-                  className="mt-6 rounded-xl border border-[#0D9488]/35 bg-[#F0FDFA] p-5"
+                  className="mt-4 rounded-xl border border-[#0D9488]/35 bg-[#F0FDFA] p-4"
                 >
                   <div className="flex items-start gap-3">
                     <Info className="mt-0.5 h-5 w-5 shrink-0 text-[#0D9488]" aria-hidden="true" />
@@ -358,7 +373,7 @@ export const Contact: React.FC = () => {
                         or copy the formatted note below:
                       </p>
 
-                      <div className="flex flex-wrap items-center gap-2.5 pt-2">
+                      <div className="flex flex-wrap items-center gap-2.5 pt-1">
                         <a
                           href={buildMailtoHref(submittedMessage)}
                           className="inline-flex h-9 items-center gap-2 rounded-lg bg-[#2563EB] px-3.5 text-xs font-semibold text-white hover:bg-[#1D4ED8]"

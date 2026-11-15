@@ -1,57 +1,20 @@
-# Janani Murali — Developer Portfolio
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
+</div>
 
-Personal developer portfolio showcasing computer science engineering projects, applied AI applications, certifications, and experience.
+# Run and deploy your AI Studio app
 
-## 🚀 Built With
+This contains everything you need to run your app locally.
 
-- **React 19**
-- **TypeScript**
-- **Vite**
-- **Tailwind CSS v4**
-- **Motion (Framer Motion)**
-- **Lucide Icons**
+View your app in AI Studio: https://ai.studio/apps/3925e2c3-be97-4aca-99ff-c4be1f53c3a8
 
-## 💻 Featured Projects
+## Run Locally
 
-- **SysPredictAI** — AI-assisted system monitoring and predictive analysis
-- **Personal AI Knowledge Assistant** — Context-aware RAG knowledge retrieval system
-- **AI-Enhanced Document Generator** — Full-stack document creation with Supabase persistence
-- **KalaSetu** — AI market linkage platform for artisans (Smart India Hackathon 2026)
-- **Multi-Agent Negotiation Simulator** — AI-vs-AI & human-vs-AI negotiation platform (Infosys Springboard 7.0)
-- **ReviewAI** — AI-assisted review analysis and feedback synthesis
-- **Document QA RAG** — Document ingestion and grounded question answering
+**Prerequisites:**  Node.js
 
-## 🛠️ Local Development
 
-### Prerequisites
-- Node.js (v18+ recommended)
-- npm / pnpm / yarn
-
-### Installation
-
-1. Clone repository:
-   ```bash
-   git clone https://github.com/jananimurali0212/portfolio.git
-   cd portfolio
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start development server:
-   ```bash
-   npm run dev
-   ```
-
-4. Build for production:
-   ```bash
-   npm run build
-   ```
-
-## 📬 Contact
-
-- **Email:** [jananimurali0212@gmail.com](mailto:jananimurali0212@gmail.com)
-- **LinkedIn:** [janani-murali0212](https://www.linkedin.com/in/janani-murali0212/)
-- **GitHub:** [jananimurali0212](https://github.com/jananimurali0212)
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`

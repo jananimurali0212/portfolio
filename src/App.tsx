@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { ArrowUp } from 'lucide-react';
+import { useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { AboutEducation } from './components/AboutEducation';
 import { Achievements } from './components/Achievements';
 import { CertificateViewerModal } from './components/CertificateViewerModal';
@@ -10,7 +10,7 @@ import { Experience } from './components/Experience';
 import { Footer } from './components/Footer';
 import { Hero } from './components/Hero';
 import { LoadingScreen } from './components/LoadingScreen';
-import { NAV_ITEMS, Navbar } from './components/Navbar';
+import { NAV_ITEMS, Navbar, SectionId } from './components/Navbar';
 import { Projects } from './components/Projects';
 import { Skills } from './components/Skills';
 import {
@@ -20,22 +20,6 @@ import {
   INITIAL_PROJECTS,
   PROFILE,
 } from './data/portfolioData';
-import {
-  AchievementItem,
-  CertificationItem,
-  ExperienceItem,
-  ProjectItem,
-} from './types/portfolio';
-
-const STORAGE_KEY = 'jm_portfolio_customizations_v2';
-
-interface StoredCustomizations {
-  cgpa?: string;
-  projects?: ProjectItem[];
-  experiences?: ExperienceItem[];
-  certifications?: CertificationItem[];
-  achievements?: AchievementItem[];
-}
 
 interface ViewerAsset {
   title: string;
@@ -44,141 +28,22 @@ interface ViewerAsset {
   isImage?: boolean;
 }
 
-function loadStoredState(): StoredCustomizations {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return {};
-    const parsed = JSON.parse(raw) as StoredCustomizations;
-    if (parsed.projects) {
-      parsed.projects = parsed.projects.filter((p) => p.id !== 'ai-receptionist');
-    }
-    return parsed;
-  } catch {
-    return {};
-  }
-}
-
 export default function App() {
-  const [stored] = useState<StoredCustomizations>(() => loadStoredState());
-  const [cgpa, setCgpa] = useState<string>(stored.cgpa ?? PROFILE.education.cgpa);
-  const [projects, setProjects] = useState<ProjectItem[]>(stored.projects ?? INITIAL_PROJECTS);
-  const [experiences, setExperiences] = useState<ExperienceItem[]>(
-    stored.experiences ?? INITIAL_EXPERIENCES
-  );
-  const [certifications, setCertifications] = useState<CertificationItem[]>(
-    stored.certifications ?? INITIAL_CERTIFICATIONS
-  );
-  const [achievements, setAchievements] = useState<AchievementItem[]>(
-    stored.achievements ?? INITIAL_ACHIEVEMENTS
-  );
-  const [hasCustomEdits, setHasCustomEdits] = useState<boolean>(
-    () => Object.keys(stored).length > 0
-  );
-
-  const [activeSection, setActiveSection] = useState<string>('home');
-  const [showFloatingTop, setShowFloatingTop] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+  const [activeSection, setActiveSection] = useState<SectionId>('home');
   const [viewerAsset, setViewerAsset] = useState<ViewerAsset | null>(null);
 
-  // Persist user customizations locally
-  const persistState = (next: StoredCustomizations) => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-      setHasCustomEdits(true);
-    } catch {
-      // Ignore storage quota errors
-    }
+  const handleSelectSection = (id: SectionId) => {
+    setActiveSection(id);
+    window.scrollTo({ top: 0, behavior: 'auto' });
   };
 
-  const handleUpdateCgpa = (nextCgpa: string) => {
-    setCgpa(nextCgpa);
-    persistState({ cgpa: nextCgpa, projects, experiences, certifications, achievements });
-  };
-
-  const handleUpdateProject = (updated: ProjectItem) => {
-    const nextProjects = projects.map((p) => (p.id === updated.id ? updated : p));
-    setProjects(nextProjects);
-    persistState({ cgpa, projects: nextProjects, experiences, certifications, achievements });
-  };
-
-  const handleUpdateExperienceDate = (id: string, nextPeriod: string) => {
-    const nextExperiences = experiences.map((e) =>
-      e.id === id ? { ...e, period: nextPeriod } : e
-    );
-    setExperiences(nextExperiences);
-    persistState({ cgpa, projects, experiences: nextExperiences, certifications, achievements });
-  };
-
-  const handleUpdateCertification = (updated: CertificationItem) => {
-    const nextCerts = certifications.map((c) => (c.id === updated.id ? updated : c));
-    setCertifications(nextCerts);
-    persistState({ cgpa, projects, experiences, certifications: nextCerts, achievements });
-  };
-
-  const handleUpdateAchievement = (updated: AchievementItem) => {
-    const nextAchievements = achievements.map((a) => (a.id === updated.id ? updated : a));
-    setAchievements(nextAchievements);
-    persistState({ cgpa, projects, experiences, certifications, achievements: nextAchievements });
-  };
-
-  const handleResetEdits = () => {
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-    } catch {
-      // Ignore storage errors
-    }
-    setCgpa(PROFILE.education.cgpa);
-    setProjects(INITIAL_PROJECTS);
-    setExperiences(INITIAL_EXPERIENCES);
-    setCertifications(INITIAL_CERTIFICATIONS);
-    setAchievements(INITIAL_ACHIEVEMENTS);
-    setHasCustomEdits(false);
-  };
-
-  // Active section highlight & back-to-top visibility
-  useEffect(() => {
-    const sectionIds = NAV_ITEMS.map((item) => item.id);
-    const elements = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => Boolean(el));
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]?.target.id) {
-          setActiveSection(visible[0].target.id);
-        }
-      },
-      {
-        rootMargin: '-25% 0px -55% 0px',
-        threshold: [0.1, 0.25, 0.5],
-      }
-    );
-
-    elements.forEach((el) => observer.observe(el));
-
-    const onScroll = () => {
-      setShowFloatingTop(window.scrollY > 520);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', onScroll);
-    };
-  }, []);
-
-  return (
-    <div className="relative min-h-screen overflow-x-clip bg-[#F8FAFC] text-[#0F172A]">
-      <LoadingScreen />
-      <CursorGlow />
-
-      <div className="relative z-10">
-        <Navbar activeSection={activeSection} />
-
-        <main>
+  const renderSection = () => {
+    switch (activeSection) {
+      case 'home':
+        return (
           <Hero
+            onNavigateSection={handleSelectSection}
             onOpenResumePreview={() =>
               setViewerAsset({
                 title: 'Janani Murali — Resume',
@@ -186,51 +51,95 @@ export default function App() {
               })
             }
           />
-
-          <AboutEducation cgpa={cgpa} onUpdateCgpa={handleUpdateCgpa} />
-
-          <Skills />
-
-          <Projects projects={projects} onUpdateProject={handleUpdateProject} />
-
+        );
+      case 'about':
+        return <AboutEducation />;
+      case 'skills':
+        return <Skills />;
+      case 'projects':
+        return <Projects projects={INITIAL_PROJECTS} />;
+      case 'experience':
+        return (
           <Experience
-            experiences={experiences}
-            onUpdateExperienceDate={handleUpdateExperienceDate}
+            experiences={INITIAL_EXPERIENCES}
             onViewCertificate={(title, assetUrl, verifyUrl) =>
               setViewerAsset({ title, assetUrl, verifyUrl })
             }
           />
-
+        );
+      case 'certifications':
+        return (
           <Certifications
-            certifications={certifications}
-            onUpdateCertification={handleUpdateCertification}
+            certifications={INITIAL_CERTIFICATIONS}
             onViewAsset={(title, assetUrl, verifyUrl, isImage) =>
               setViewerAsset({ title, assetUrl, verifyUrl, isImage })
             }
           />
+        );
+      case 'achievements':
+        return <Achievements achievements={INITIAL_ACHIEVEMENTS} />;
+      case 'contact':
+        return <Contact />;
+    }
+  };
 
-          <Achievements
-            achievements={achievements}
-            onUpdateAchievement={handleUpdateAchievement}
-          />
+  return (
+    <div className="relative flex min-h-screen flex-col overflow-x-clip bg-[#F8FAFC] text-[#0F172A]">
+      <LoadingScreen />
+      <CursorGlow />
 
-          <Contact />
+      <div className="relative z-10 flex flex-1 flex-col">
+        <Navbar activeSection={activeSection} onSelectSection={handleSelectSection} />
+
+        <main className="flex-1" style={{ perspective: '1200px' }}>
+          {/* Compact Icon Bar for Quick Section Switching when Inside Sub-Views */}
+          {activeSection !== 'home' && (
+            <div className="border-b border-[#CBD5E1] bg-white/80 backdrop-blur-sm">
+              <div className="mx-auto flex max-w-7xl items-center gap-1.5 overflow-x-auto px-4 py-2 sm:px-6 lg:px-8">
+                {NAV_ITEMS.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = activeSection === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => handleSelectSection(item.id)}
+                      className={`inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg px-2.5 text-xs font-medium whitespace-nowrap transition-colors ${
+                        isActive
+                          ? 'bg-[#2563EB] text-white'
+                          : 'border border-[#E2E8F0] bg-[#F8FAFC] text-[#334155] hover:border-[#2563EB] hover:text-[#0F172A]'
+                      }`}
+                    >
+                      <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+                      <span>{item.shortLabel}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* 3D Perspective View Transition */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeSection}
+              initial={
+                prefersReducedMotion ? false : { opacity: 0, y: 12, rotateX: 3, scale: 0.99 }
+              }
+              animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+              exit={
+                prefersReducedMotion ? undefined : { opacity: 0, y: -8, rotateX: -2, scale: 0.99 }
+              }
+              transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+              style={{ transformOrigin: 'top center' }}
+            >
+              {renderSection()}
+            </motion.div>
+          </AnimatePresence>
         </main>
 
-        <Footer hasCustomEdits={hasCustomEdits} onResetEdits={handleResetEdits} />
+        <Footer onSelectSection={handleSelectSection} />
       </div>
-
-      {/* Floating Back-to-Top Button */}
-      {showFloatingTop && (
-        <button
-          type="button"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          aria-label="Scroll back to top"
-          className="fixed right-5 bottom-5 z-30 flex h-11 w-11 items-center justify-center rounded-xl border border-[#CBD5E1] bg-white text-[#0F172A] shadow-md transition-colors hover:border-[#2563EB] hover:text-[#2563EB]"
-        >
-          <ArrowUp className="h-4 w-4 text-[#2563EB]" aria-hidden="true" />
-        </button>
-      )}
 
       {/* Document / Certificate / Resume Preview Modal */}
       {viewerAsset && (

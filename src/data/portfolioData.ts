@@ -12,8 +12,8 @@ export const PROFILE = {
   title: 'Computer Science Engineering Student | Aspiring Software Developer',
   intro:
     'Building intelligent applications, exploring emerging technologies and transforming ideas into practical software solutions.',
-  photoUrl: `${import.meta.env.BASE_URL}assets/aistudio/Jan_photo_deac32e9.png`,
-  resumeUrl: `${import.meta.env.BASE_URL}assets/aistudio/Janani_M_Resume_a4bd840d.pdf`,
+  photoUrl: '/assets/aistudio/Jan_photo_deac32e9.png',
+  resumeUrl: '/assets/aistudio/Janani_M_Resume_a4bd840d.pdf',
   email: 'jananimurali0212@gmail.com',
   github: 'https://github.com/jananimurali0212',
   linkedin: 'https://www.linkedin.com/in/janani-murali0212/',
@@ -268,7 +268,7 @@ export const INITIAL_EXPERIENCES: ExperienceItem[] = [
       'Handled debugging, functionality verification, and end-to-end quality checks across negotiation scenarios.',
       'Received mentor appreciation for strong language proficiency, clear communication, and articulation.',
     ],
-    certificatePdfUrl: `${import.meta.env.BASE_URL}assets/aistudio/infosys_internship_artificial_intelligence_57d3e806.pdf`,
+    certificatePdfUrl: '/assets/aistudio/infosys_internship_artificial_intelligence_57d3e806.pdf',
     certificateVerifyUrl: 'https://verify.onwingspan.com',
   },
   {
@@ -285,7 +285,7 @@ export const INITIAL_EXPERIENCES: ExperienceItem[] = [
       'Identified five practical AI-driven growth recommendations tailored for NGO operations.',
       'Supported fundraising-related research and campaign activities on Ketto.',
     ],
-    certificatePdfUrl: `${import.meta.env.BASE_URL}assets/aistudio/Inamigos_internship_a2f427d0.pdf`,
+    certificatePdfUrl: '/assets/aistudio/Inamigos_internship_a2f427d0.pdf',
   },
 ];
 
@@ -298,7 +298,7 @@ export const INITIAL_CERTIFICATIONS: CertificationItem[] = [
     issueDate: 'November 9, 2026',
     details:
       'Creation of AI Driven Multi-Agent Negotiation Training & Simulation Platform (July 15 – September 20, 2026).',
-    pdfUrl: `${import.meta.env.BASE_URL}assets/aistudio/infosys_internship_artificial_intelligence_57d3e806.pdf`,
+    pdfUrl: '/assets/aistudio/infosys_internship_artificial_intelligence_57d3e806.pdf',
     verificationUrl: 'https://verify.onwingspan.com',
   },
   {
@@ -308,93 +308,110 @@ export const INITIAL_CERTIFICATIONS: CertificationItem[] = [
     category: 'AI & Web Development',
     issueDate: 'June 30, 2026',
     details: 'Completion of AI Web Development Internship (June 13 – June 26, 2026).',
-    pdfUrl: `${import.meta.env.BASE_URL}assets/aistudio/Inamigos_internship_a2f427d0.pdf`,
+    pdfUrl: '/assets/aistudio/Inamigos_internship_a2f427d0.pdf',
   },
   {
     id: 'cert-nptel-java',
     title: 'NPTEL Programming in Java (Elite, 75%)',
-    issuer: 'NPTEL / IIT',
+    issuer: 'NPTEL · IIT Kharagpur',
     category: 'Programming',
-    issueDate: 'Academic Record',
-    details: 'Certified Elite score (75%) in object-oriented Java programming.',
+    issueDate: 'Jul–Oct 2026',
+    details:
+      '12-week course · Consolidated score: 75% (Assignments 24.41/25, Proctored Exam 50.25/75) · Roll No: NPTEL26CS153S1184902065.',
+    imageUrl: '/assets/aistudio/nptel_6c57d649.PNG',
+  },
+  {
+    id: 'cert-cii-indiaai',
+    title: 'Foundational Course on Applied Machine Learning and AI',
+    issuer: 'CII · INDIAai & HP Centre for AI',
+    category: 'Artificial Intelligence',
+    issueDate: 'September 16, 2026',
+    details:
+      'NCVET Recognised assessment (1934 hrs) · Certificate No.: 23CII-FJ26-59024.',
+    imageUrl: '/assets/aistudio/INDIAai_8f1af620.jpeg',
   },
   {
     id: 'cert-infosys-ds',
-    title: 'Infosys Springboard Data Structures',
+    title: 'Infosys Springboard Data Structures and Algorithms',
     issuer: 'Infosys Springboard',
     category: 'Computer Science Core',
-    issueDate: 'Verification link pending',
-    details: 'Core data structures and algorithmic problem-solving coursework.',
+    issueDate: 'July 6, 2026',
+    details:
+      'Course Completion Certificate for Data Structures and Algorithms (Completed July 5, 2026).',
+    imageUrl: '/assets/aistudio/infosys_81f91e4a.jpeg',
+    verificationUrl: 'https://verify.onwingspan.com',
+  },
+  {
+    id: 'cert-nasscom-python',
+    title: 'NASSCOM Software Programmer – Python (Bronze)',
+    issuer: 'NASSCOM FutureSkills Prime',
+    category: 'Programming',
+    issueDate: 'April 5, 2026',
+    details:
+      'Cleared Software Programmer - Python assessment (NSQF Level 5, Bronze Category) · ID: FSP/2026/4/10281521.',
+    imageUrl: '/assets/aistudio/nasscom_9673db17.jpeg',
+  },
+  {
+    id: 'cert-simplilearn-c',
+    title: 'Simplilearn C Programming Basics',
+    issuer: 'Simplilearn SkillUP',
+    category: 'Programming',
+    issueDate: 'April 26, 2026',
+    details: 'Certificate of Completion for C Programming Basics · Code: 10154881.',
+    imageUrl: '/assets/aistudio/simplilearn_5d6513fb.jpeg',
   },
   {
     id: 'cert-tcs-ion',
     title: 'TCS iON Career Edge – Young Professional',
     issuer: 'TCS iON',
     category: 'Professional Skills',
-    issueDate: 'Verification link pending',
-    details: 'Workplace communication, soft skills, and IT career readiness curriculum.',
-  },
-  {
-    id: 'cert-simplilearn-cpp',
-    title: 'Simplilearn C++ / C Programming Basics',
-    issuer: 'Simplilearn',
-    category: 'Programming',
-    issueDate: 'Verification link pending',
-    details: 'Foundational C and C++ programming syntax, memory concepts, and control flow.',
-  },
-  {
-    id: 'cert-nasscom-python',
-    title: 'NASSCOM Software Programmer – Python',
-    issuer: 'NASSCOM FutureSkills',
-    category: 'Programming',
-    issueDate: 'Verification link pending',
-    details: 'Python programming assessment for software development fundamentals.',
+    issueDate: 'April 3, 2026',
+    details:
+      'Communication, presentation, interview, IT foundational skills & AI overview · Cert ID: 272697-30472937-1016.',
+    imageUrl: '/assets/aistudio/tcs_iON_3d100a2c.jpeg',
   },
   {
     id: 'cert-swayam-plus',
-    title: 'SWAYAM Plus Employability Skills',
-    issuer: 'SWAYAM Plus',
+    title: 'Employability Skills – JobReady (Wadhwani / SWAYAM Plus)',
+    issuer: 'Wadhwani Foundation · SWAYAM Plus',
     category: 'Career Readiness',
-    issueDate: 'Verification link pending',
-    details: 'Structured employability and professional problem-solving training.',
+    issueDate: 'May 9, 2026',
+    details: 'Certificate of Completion – Basic (105 hours of training).',
+    imageUrl: '/assets/aistudio/swayamplus_78d5b06c.jpeg',
   },
   {
     id: 'cert-mindluster',
     title: 'Mindluster Soft Skills',
-    issuer: 'Mindluster',
+    issuer: 'MindLuster',
     category: 'Communication',
-    issueDate: 'Verification link pending',
-    details: 'Interpersonal communication, presentation, and collaboration skills.',
+    issueDate: 'February 28, 2026',
+    details: 'Certificate of Achievement in Soft Skills · Certified No.: 9fb1c154.',
+    imageUrl: '/assets/aistudio/mindluster_7e732c1f.jpeg',
   },
 ];
 
 export const INITIAL_ACHIEVEMENTS: AchievementItem[] = [
   {
     id: 'ach-sih',
-    title: 'Smart India Hackathon (SIH) 2026 Participation',
+    title: 'Smart India Hackathon (SIH) 2026 — Round 1',
     eventOrContext: 'Problem Statement SIH26090 · KalaSetu',
     dateLabel: '2026',
     description:
-      'Designed and built the KalaSetu AI market linkage concept empowering traditional artisans with Gemini Vision craft identification and multilingual listings.',
-    isEditable: true,
+      'Participated in Smart India Hackathon 2026 Round 1, designing and building the KalaSetu AI market linkage platform empowering traditional artisans with Gemini Vision craft identification and multilingual listings.',
   },
   {
     id: 'ach-conference',
     title: 'International Conference Participation',
-    eventOrContext: 'Academic International Conference (Editable event name)',
-    dateLabel: 'Date editable',
+    eventOrContext: 'College International Conference',
     description:
       'Participated in a college-level International Conference, engaging with technical research presentations and emerging computing topics.',
-    isEditable: true,
   },
   {
     id: 'ach-capgemini',
     title: 'Capgemini-Collaborated College Ideathon',
-    eventOrContext: 'Panimalar Engineering College × Capgemini (Editable event name)',
-    dateLabel: 'Date editable',
+    eventOrContext: 'Panimalar Engineering College × Capgemini',
     description:
       'Participated in an industry-collaborated ideathon conducted with Capgemini, developing practical problem-solving proposals under time constraints.',
-    isEditable: true,
   },
   {
     id: 'ach-infosys-mentor',
@@ -407,7 +424,7 @@ export const INITIAL_ACHIEVEMENTS: AchievementItem[] = [
   {
     id: 'ach-projects',
     title: 'Consistent Applied AI & Full-Stack Engineering',
-    eventOrContext: '7+ Public Repositories & Academic CGPA 9.4',
+    eventOrContext: '7 Public Repositories & Academic CGPA 9.4',
     dateLabel: '2025–2026',
     description:
       'Built practical applications spanning RAG pipelines, multi-agent systems, predictive monitoring, and Supabase-backed full-stack web apps alongside a 9.4 CGPA.',
